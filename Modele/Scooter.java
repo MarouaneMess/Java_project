@@ -1,18 +1,21 @@
 package Modele;
 
 import java.time.LocalDate;
+import java.util.Vector;
 
 public class Scooter {
-    private static int compteurId = 0;
-    private int id_scooter;
+    private int immatriculation;
     private Modele modele;
     private LocalDate annee_sortie;
     private boolean disponible;
     private double km;
     private double prix_Jour;
+    private Vector<Location> locations;
+    private Parc parc;
+
 
  
-    public Scooter(int id, Modele modele, LocalDate annee_sortie, boolean disponible, double km, double prix_Jour) {
+    public Scooter(int immatriculation, Modele modele, LocalDate annee_sortie, boolean disponible, double km, double prix_Jour, Parc parc) {
         if (annee_sortie.isAfter(LocalDate.now())) {
             throw new IllegalArgumentException("L'année de sortie ne peut pas être future.");
         }
@@ -22,17 +25,26 @@ public class Scooter {
         if (prix_Jour < 0) {
             throw new IllegalArgumentException("Le prix du jour ne peut pas être négatif.");
         }
+        if (parc == null) {
+            throw new IllegalArgumentException("Le parc ne peut pas être null.");
+        }
 
-        this.id_scooter = ++compteurId;
+        this.immatriculation  = immatriculation;
         this.modele = modele;
         this.annee_sortie = annee_sortie;
         this.disponible = disponible;
         this.km = km;
         this.prix_Jour = prix_Jour;
+        this.locations = new Vector<>();
+        this.parc = parc;
     
     }
+
+    public void setId(int id ){
+        this.immatriculation=id;
+    }
     public int getId() {
-        return id_scooter;
+        return immatriculation;
     }
 
     public Modele getModele() {
@@ -70,6 +82,19 @@ public class Scooter {
     public double getPrixJour() {
         return prix_Jour;
     }
+
+    public void setLocaiton(Vector<Location> loc) {
+        this.locations = loc;
+    }
+    public Vector<Location> getLocations() {
+        return new Vector<>(locations);
+    }
+    public void setParc(Parc p){
+        this.parc = p;
+    }
+    public Parc getParc() {
+        return parc;
+    }
     public String toString() {
         return 
                 "SCOOTER N° " + getId() +"\n" +
@@ -78,7 +103,9 @@ public class Scooter {
         "      - KILOMETRAGE : " + getKm() +" Km "+"\n" +
         "      - PRIX_JOUR : " + getPrixJour() +" Euros "+"\n"+
         "      - EN LOCATION : " + (isDisponible() ? "OUI" : "NON") + "\n" +
-           "----------------------------------------------------------------";
+        "      - PARC        : " + (parc != null ? parc.getAdresse() : "Non assigné") + "\n" +
+        "      - NOMBRE LOCATIONS: " + locations.size() + "\n" +
+        "----------------------------------------------------------------";
     }
         // save 
 

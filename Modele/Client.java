@@ -10,10 +10,11 @@ public class Client {
     private String prenom;
     private LocalDate date_naissance;
     private String adresse;
-    private Vector<Permis> permis;
+    private Permis permis;
     private Vector<Location> locations;
+    Parc parc;
 
-    public Client(String nom, String prenom, LocalDate date_naissance, String adresse) {
+    public Client(String nom, String prenom, LocalDate date_naissance, String adresse, Permis permis) {
         if (nom == null ) {
             throw new IllegalArgumentException("Le nom ne peut pas être vide.");
         }
@@ -32,7 +33,7 @@ public class Client {
         this.prenom = prenom;
         this.date_naissance = date_naissance;
         this.adresse = adresse;
-        this.permis = new Vector<>();
+        this.permis = permis;
         this.locations = new Vector<>();
     }
 
@@ -82,12 +83,12 @@ public class Client {
     public String getAdresse() {
         return adresse;
     }
-     public void setPermis(Vector<Permis> permis) {
+     public void setPermis(Permis permis) {
         this.permis = permis;
     }
 
-    public Vector<Permis> getPermis() {
-        return new Vector<>(permis);
+    public Permis getPermis() {
+        return permis;
     }
     public void setLocaiton(Vector<Location> loc) {
         this.locations = loc;
@@ -97,27 +98,9 @@ public class Client {
         return new Vector<>(locations);
     }
 
-    public void ajouterPermis(Permis p) {
-        if (p == null) {
-            throw new IllegalArgumentException("Le permis ne peut pas être null.");
-        }
-        this.permis.add(p);
-    }
+  
 
-    public void supprimerPermis(Permis p) {
-        this.permis.remove(p);
-    }
-
-    public void ajouterLocation(Location loc) {
-        if (loc == null) {
-            throw new IllegalArgumentException("La location ne peut pas être null.");
-        }
-        this.locations.add(loc);
-    }
-
-    public void supprimerLocation(Location loc) {
-        this.locations.remove(loc);
-    }
+    
 
 
     public String toString() {
@@ -126,7 +109,7 @@ public class Client {
                "      - PRÉNOM      : " + getPrenom()+ "\n" +
                "      - AGE         : " + getAge() + "\n" +
                "      - ADRESSE     : " + getAdresse() + "\n" +
-               "      - PERMIS      : " + (permis.isEmpty() ? "Aucun" : permis) + "\n" +
+               "      - PERMIS      : " + (permis==null ? "Aucun" : permis) + "\n" +
                "      - LOCATIONS   : " + (locations.isEmpty() ? "Aucune" : locations) + "\n" +
                "------------------------------------------------------";
     }

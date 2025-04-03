@@ -4,22 +4,34 @@ import java.util.Vector;
 import java.time.LocalDate;
 
 public class Parc {
+    private int auto_inc=0;
+    private int id ;
     private String adresse;
     private Vector<Scooter> scooters;
     private Vector<Client> clients;
     private Vector<Marque> marques;
 
-    public Parc(String adresse) {
+    public Parc( String adresse) {
         if (adresse == null || adresse.isEmpty()) {
             throw new IllegalArgumentException("L'adresse du parc ne peut pas être vide.");
         }
 
         this.adresse = adresse;
+        this.id = ++auto_inc;
         this.scooters = new Vector<>();
         this.clients = new Vector<>();
         this.marques = new Vector<>();
     }
 
+    public int getId() {
+        return id;
+    }
+    public void setAdresse(String adresse) {
+        if (adresse == null ) {
+            throw new IllegalArgumentException("L'adresse du parc ne peut pas être vide.");
+        }
+        this.adresse = adresse;
+    }
     public String getAdresse() {
         return adresse;
     }
@@ -96,10 +108,6 @@ public class Parc {
     }
 
 
-
-    // reste supprimer scooter (on supprime les locations ) , client (on supprime tous les locations ) , marque (on supprime tous les scoot )
-    // rechercher ...
-
     ////// des fonctionnalites a revoir 
     public boolean louerScooter(int idScooter, int idClient, LocalDate dateDebut, LocalDate dateRetour) {
     for (Scooter scooter : scooters) {
@@ -123,21 +131,24 @@ public class Parc {
     return false;
 }
 
-public boolean retournerScooter(int idScooter, double kmEffectue) {
-    for (Scooter scooter : scooters) {
-        if (scooter.getId() == idScooter) {
-            if (scooter.isDisponible()) {
-                System.out.println("Ce scooter n'est pas en location.");
-                return false;
-            }
+// public boolean retournerScooter(int idScooter, double kmEffectue) {
+//     for (Scooter scooter : scooters) {
+//         if (scooter.getId() == idScooter) {
+//             if (scooter.isDisponible()) {
+//                 System.out.println("Ce scooter n'est pas en location.");
+//                 return false;
+//             }
             
 
-            return true;
-        }
-    }
-    System.out.println("Scooter introuvable.");
-    return false;
-}
+//             return true;
+//         }
+//     }
+//     System.out.println("Scooter introuvable.");
+//     return false;
+// }
+
+
+
 public void afficherResumeParc() {
     int total = scooters.size();
     int enLocation = 0;
@@ -161,8 +172,4 @@ public String toString() {
            "      - Nombre de marques  : " + marques.size() + "\n" +
            "------------------------------------------------------";
 }
-
-
-
-
 }
