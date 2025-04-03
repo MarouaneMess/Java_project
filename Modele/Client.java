@@ -95,12 +95,8 @@ public class Client {
     }
 
     public Vector<Location> getLocations() {
-        return new Vector<>(locations);
+        return new Vector<>(locations);//une copie pour eviter la modification de l'origin
     }
-
-  
-
-    
 
 
     public String toString() {
