@@ -8,3 +8,5 @@ la recherche de client avec id(permis) ou nom ou autre chose
 les settres des id (oui / non)
 est ce qu'on doit verifier la taille de numero de permis 
 pour le id de client on mets auto inscriment ou le num de permis
+
+est ce qu'on peut utiliser interface serializable 
