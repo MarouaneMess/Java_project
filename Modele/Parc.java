@@ -4,7 +4,7 @@ import java.util.Vector;
 import java.time.LocalDate;
 
 public class Parc {
-    private int auto_inc=0;
+    private static int auto_inc=0;
     private int id ;
     private String adresse;
     private Vector<Scooter> scooters;
